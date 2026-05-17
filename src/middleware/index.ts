@@ -28,3 +28,14 @@ export async function errorHandler(c: Context, next: Next) {
   }
 }
 
+export async function userIdMiddleware(c: Context, next: Next) {
+  const userId = c.req.header("X-User-Id");
+  if (!userId || userId.trim() === "") {
+    return c.json(
+      { success: false, error: "X-User-Id header is required" },
+      401,
+    );
+  }
+  c.set("userId", userId.trim());
+  await next();
+}
