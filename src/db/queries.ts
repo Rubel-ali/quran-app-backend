@@ -69,3 +69,46 @@ export async function countSearchAyahs(q: string): Promise<number> {
   return Number(row?.count ?? 0);
 }
 
+
+// ─── User Settings ────────────────────────────────────────────────────────────
+
+export async function getUserSettings(userId: string) {
+  return queryOne(`SELECT * FROM user_settings WHERE user_id = $1`, [userId]);
+}
+
+export async function upsertUserSettings(
+  userId: string,
+  s: {
+    arabicFont?: string;
+    arabicFontSize?: number;
+    translationFontSize?: number;
+    showTranslation?: boolean;
+    showTransliteration?: boolean;
+    readingMode?: string;
+  },
+) {
+  return queryOne(
+    `INSERT INTO user_settings
+       (user_id, arabic_font, arabic_font_size, translation_font_size,
+        show_translation, show_transliteration, reading_mode)
+     VALUES ($1, $2, $3, $4, $5, $6, $7)
+     ON CONFLICT (user_id) DO UPDATE SET
+       arabic_font           = EXCLUDED.arabic_font,
+       arabic_font_size      = EXCLUDED.arabic_font_size,
+       translation_font_size = EXCLUDED.translation_font_size,
+       show_translation      = EXCLUDED.show_translation,
+       show_transliteration  = EXCLUDED.show_transliteration,
+       reading_mode          = EXCLUDED.reading_mode,
+       updated_at            = NOW()
+     RETURNING *`,
+    [
+      userId,
+      s.arabicFont ?? "KFGQ",
+      s.arabicFontSize ?? 40,
+      s.translationFontSize ?? 18,
+      s.showTranslation ?? true,
+      s.showTransliteration ?? false,
+      s.readingMode ?? "translation",
+    ],
+  );
+}

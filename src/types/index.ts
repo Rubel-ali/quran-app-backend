@@ -21,3 +21,13 @@ export interface Ayah {
   ruku: number;
 }
 
+export interface UserSettings {
+  user_id: string;
+  arabic_font: string;
+  arabic_font_size: number;
+  translation_font_size: number;
+  show_translation: boolean;
+  show_transliteration: boolean;
+  reading_mode: string;
+  updated_at: string;
+}

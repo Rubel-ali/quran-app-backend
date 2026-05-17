@@ -3,6 +3,7 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { corsMiddleware, loggerMiddleware, errorHandler } from "./middleware/index";
 import surahRouter from "./routes/surah";
+import searchRouter from "./routes/search";
 
 const app = new Hono();
 
@@ -20,7 +21,8 @@ app.get("/", (c) =>
     endpoints: [
       "GET  /api/surahs",
       "GET  /api/surahs/:number",
-      "GET  /api/surahs/:number/ayahs"
+      "GET  /api/surahs/:number/ayahs",
+      "GET  /api/search?q=:query&limit=20&offset=0"
     ],
   })
 );
@@ -31,6 +33,7 @@ app.get("/health", (c) =>
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 app.route("/api/surahs", surahRouter);
+app.route("/api/search", searchRouter);
 
 // ── 404 ───────────────────────────────────────────────────────────────────────
 app.notFound((c) =>
@@ -41,5 +44,5 @@ app.notFound((c) =>
 const PORT = Number(process.env.PORT ?? 3001);
 
 serve({ fetch: app.fetch, port: PORT }, () => {
-  console.log(`🕌 Quran API running → http://localhost:${PORT}`);
+  console.log(`Quran API running → http://localhost:${PORT}`);
 });
