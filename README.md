@@ -21,35 +21,35 @@ Node.js + Hono + PostgreSQL backend for the Quran Web Application.
 npm install
 ```
 
-### 2. PostgreSQL database তৈরি করুন
+### 2. PostgreSQL database Create
 ```sql
 CREATE DATABASE quran_db;
 ```
 
-### 3. .env file বানান
+### 3. .env file Create
 ```bash
 cp .env.example .env
 ```
 
-`.env` এ আপনার info দিন:
+`.env` Enter your info at:
 ```env
 DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/quran_db
 PORT=3001
 FRONTEND_URL=http://localhost:3000
 ```
 
-### 4. Tables তৈরি করুন
+### 4. Tables Create
 ```bash
 npm run db:migrate
 ```
 
-### 5. Data seed করুন (একবারই লাগবে)
+### 5. Data seed Do (only needed once)
 ```bash
 npm run db:seed
 ```
-> আলকুরআন.cloud থেকে সব ৬২৩৬ আয়াত fetch করে PostgreSQL এ insert করবে। ~৬০ সেকেন্ড লাগবে।
+> Fetch all 6236 verses from AlQuran.cloud and insert them into PostgreSQL. It will take ~60 seconds.
 
-### 6. Server চালু করুন
+### 6. Start the server
 ```bash
 # Development (hot reload)
 npm run dev
@@ -155,10 +155,10 @@ scripts/
 
 ## Deploy (Railway / Render)
 
-1. GitHub এ push করুন
-2. Railway/Render এ connect করুন
-3. Environment variables set করুন:
-   - `DATABASE_URL` (platform দেবে)
+1. GitHub push
+2. Railway/Render connect
+3. Environment variables set:
+   - `DATABASE_URL` (platform will provide)
    - `PORT=3001`
    - `FRONTEND_URL=https://quran-app-flax-nu.vercel.app`
 4. Build: `npm install && npm run build`
