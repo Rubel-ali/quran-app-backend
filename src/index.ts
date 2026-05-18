@@ -1,6 +1,6 @@
 import "dotenv/config";
-import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { handle } from 'hono/vercel'
 
 import {
   corsMiddleware,
@@ -69,18 +69,27 @@ app.notFound((c) =>
   ),
 );
 
-if (process.env.NODE_ENV !== "production") {
-  const PORT = Number(process.env.PORT ?? 3001);
+// ✅ FOR VERCEL - এইটুকুই যোগ করতে হবে
+export const GET = handle(app)
+export const POST = handle(app)
+export const PUT = handle(app)
+export const DELETE = handle(app)
 
-  serve(
-    {
-      fetch: app.fetch,
-      port: PORT,
-    },
-    () => {
-      console.log(`Quran API running → http://localhost:${PORT}`);
-    },
-  );
+// ✅ FOR LOCAL DEVELOPMENT
+if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
+  (async () => {
+    const PORT = Number(process.env.PORT ?? 3001);
+    const { serve } = await import("@hono/node-server");
+    
+    serve(
+      {
+        fetch: app.fetch,
+        port: PORT,
+      },
+      () => {
+        console.log(`✅ Quran API running → http://localhost:${PORT}`);
+        console.log(`📝 Health check: http://localhost:${PORT}/health`);
+      },
+    );
+  })();
 }
-
-export default app;

@@ -6,7 +6,6 @@ export const corsMiddleware = cors({
   origin: [
     process.env.FRONTEND_URL ?? "http://localhost:3000",
     "http://localhost:3000",
-    "http://localhost:3001",
   ],
   allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowHeaders: ["Content-Type", "Authorization", "X-User-Id"],

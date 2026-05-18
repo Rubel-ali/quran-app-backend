@@ -160,7 +160,7 @@ scripts/
 3. Environment variables set করুন:
    - `DATABASE_URL` (platform দেবে)
    - `PORT=3001`
-   - `FRONTEND_URL=https://your-app.vercel.app`
+   - `FRONTEND_URL=https://quran-app-flax-nu.vercel.app`
 4. Build: `npm install && npm run build`
 5. Start: `npm start`
 6. First deploy এর পর: `npm run db:migrate && npm run db:seed`
