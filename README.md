@@ -136,7 +136,7 @@ src/
 ├── index.ts              # Hono app + Node.js server
 ├── db/
 │   ├── client.ts         # pg Pool + query helpers
-│   └── queries.ts        # সব SQL queries
+│   └── queries.ts        # all SQL queries
 ├── routes/
 │   ├── surah.ts
 │   ├── search.ts
@@ -149,7 +149,7 @@ src/
     └── index.ts
 
 scripts/
-├── migrate.ts            # Table তৈরি
+├── migrate.ts            # Table creation
 └── seed.ts               # Data insert
 ```
 
