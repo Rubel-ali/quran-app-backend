@@ -73,16 +73,16 @@ GET /health    → status check
 
 ### Surahs
 ```
-GET /api/surahs                  → সব ১১৪ সুরা
-GET /api/surahs/:number          → একটা সুরার info
-GET /api/surahs/:number/ayahs    → সুরার সব আয়াত + Arabic + Translation
+GET /api/surahs                  → All 114 Surahs
+GET /api/surahs/:number          → One Surah info
+GET /api/surahs/:number/ayahs    → All verses of the Surah + Arabic + Translation
 ```
 
 ### Search
 ```
 GET /api/search?q=mercy&limit=20&offset=0
 ```
-PostgreSQL full-text search — Arabic বা English উভয়ে কাজ করে।
+PostgreSQL full-text search — Arabic Or English Both work.।
 
 ### Audio
 ```
@@ -95,7 +95,7 @@ Available reciters: `abdul_basit`, `mishary`, `sudais`
 
 ### Bookmarks (X-User-Id header required)
 ```
-GET    /api/bookmarks            → user এর সব bookmark
+GET    /api/bookmarks            → All of the user's bookmarks
 POST   /api/bookmarks            → bookmark add
 DELETE /api/bookmarks/:s/:a      → bookmark remove
 ```
