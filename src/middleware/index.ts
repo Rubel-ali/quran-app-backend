@@ -5,7 +5,7 @@ import type { Context, Next } from "hono";
 export const corsMiddleware = cors({
   origin: [
     process.env.FRONTEND_URL ?? "http://localhost:3000",
-    "http://localhost:3000",
+    "http://localhost:3000", "https://quran-app-flax-nu.vercel.app"
   ],
   allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowHeaders: ["Content-Type", "Authorization", "X-User-Id"],
